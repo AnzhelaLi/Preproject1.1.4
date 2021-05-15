@@ -1,25 +1,33 @@
 package jm.task.core.jdbc.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Table
+@Entity
+@Table(name= "Users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column
+    @Column(name = "Name")
     private String name;
 
-    @Column
+    @Column(name = "LastName")
     private String lastName;
 
-    @Column
+    @Column(name = "Age")
     private Byte age;
 
     public User() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "User [name: " + getName() +
+                ", lastName: " + getLastName() +
+                ",age: " + getAge() + "]";
     }
 
     public User(String name, String lastName, Byte age) {
