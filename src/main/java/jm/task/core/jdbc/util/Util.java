@@ -53,14 +53,18 @@ private static SessionFactory sessionFactory;
         return sessionFactory;
     }
 
-    public Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName(DB_DRIVER);
-            connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+
+        private static Connection connection = null;
+        static
+        {
+            try {
+                Class.forName(DB_DRIVER);
+                connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
+    public static Connection getConnection() {
         return connection;
     }
 }
