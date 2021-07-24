@@ -15,15 +15,22 @@ import java.util.Properties;
 
 public class Util {
 
-private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-private static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";
-private static final String DB_USERNAME = "root";
-private static final String DB_PASSWORD = "Melody305??!";
+    private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+    //private static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";
+    private static final String DB_USERNAME = "root";
+    private static final String DB_PASSWORD = "Melody305??!";
+    private static Util instance;
+    private static SessionFactory sessionFactory;
 
-private static SessionFactory sessionFactory;
+    public static Util getInstance() {
+        if (instance == null) {
+            instance = new Util();
+        }
+        return instance;
+    }
 
-    public static SessionFactory getSessionFactory() {
-        if(sessionFactory == null) {
+    public SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
                 //Hibernate settings
@@ -37,7 +44,7 @@ private static SessionFactory sessionFactory;
 
                 dbSettings.put(Environment.SHOW_SQL, "true");
                 dbSettings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                dbSettings.put(Environment.HBM2DDL_AUTO, "create-drop");
+                dbSettings.put(Environment.HBM2DDL_AUTO, "update");
 
                 configuration.setProperties(dbSettings);
                 configuration.addAnnotatedClass(User.class);
@@ -46,25 +53,10 @@ private static SessionFactory sessionFactory;
                         .applySettings(configuration.getProperties()).build();
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return sessionFactory;
-    }
-
-
-        private static Connection connection = null;
-        static
-        {
-            try {
-                Class.forName(DB_DRIVER);
-                connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-    public static Connection getConnection() {
-        return connection;
     }
 }
