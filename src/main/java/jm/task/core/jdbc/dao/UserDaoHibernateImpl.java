@@ -34,7 +34,10 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                }
             }
         }
     }
@@ -51,7 +54,10 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                }
             }
         }
     }
@@ -73,7 +79,10 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                }
             }
         }
     }
@@ -93,7 +102,10 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                }
             }
         }
     }
@@ -112,7 +124,10 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                }
             }
         }
         return list;
@@ -131,7 +146,10 @@ public class UserDaoHibernateImpl implements UserDao {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                }
             }
         }
     }
